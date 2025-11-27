@@ -119,3 +119,10 @@ search:
   field: post
   content: true
   format: html
+
+# excerpt
+excerpt:
+  depth: 10
+  excerpt_excludes: []
+  more_excludes: []
+  hideWholePostExcerpts: true
