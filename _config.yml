@@ -126,3 +126,10 @@ excerpt:
   excerpt_excludes: []
   more_excludes: []
   hideWholePostExcerpts: true
+
+  # sitemap
+  sitemap:
+  path: sitemap.xml
+
+baidusitemap:
+  path: baidusitemap.xml
