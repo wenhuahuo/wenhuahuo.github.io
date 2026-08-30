@@ -26,7 +26,6 @@ const isActive = (href: string) =>
     </nav>
 
     <div class="header-cta">
-      <a href="/contact" class="btn-mini btn-mini-outline">RESUME</a>
       <a href={SITE.contact.github} target="_blank" rel="noopener" class="btn-mini btn-mini-solid"
         >● GITHUB</a
       >
@@ -111,19 +110,6 @@ const isActive = (href: string) =>
     letter-spacing: 0.08em;
     padding: 7px 14px;
     transition: all 0.2s ease;
-  }
-
-  .btn-mini-outline {
-    border: 1px solid var(--line-strong);
-    color: var(--ink-soft);
-  }
-
-  .btn-mini-outline:hover {
-    border-color: var(--ink);
-    color: var(--ink);
-  }
-
-  .btn-mini-solid {
     background: var(--ink);
     color: var(--bg);
   }
