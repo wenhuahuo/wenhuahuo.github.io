@@ -1,0 +1,29 @@
+---
+import { SITE } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="mono">© {year} {SITE.name} · {SITE.role} · {SITE.location || 'CN'}</p>
+    <a href="#top" class="mono back-top">回到顶部 ↑</a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--line);
+    padding: 26px 0;
+    margin-top: 100px;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .back-top:hover {
+    color: var(--accent);
+  }
+</style>

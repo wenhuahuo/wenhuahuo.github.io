@@ -1,0 +1,365 @@
+/* ============================================================
+   设计系统 —— 印刷品 / 编辑排版风
+   米白底 · 炭黑 · 橙色点缀 · 大号衬线标题 · 等宽标签
+   ============================================================ */
+
+:root {
+  --bg: #f0ede6;
+  --bg-soft: #eae6dc;
+  --bg-card: #e6e1d5;
+  --ink: #1b1a17;
+  --ink-soft: #5c574c;
+  --ink-faint: #97917f;
+  --accent: #e8622c;
+  --accent-soft: rgba(232, 98, 44, 0.14);
+  --line: #d9d3c3;
+  --line-strong: #b9b2a0;
+  --thumb-bg: #23211d;
+
+  --font-display: 'Playfair Display', 'Noto Serif SC', 'Songti SC', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+    'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  --container: 1240px;
+  --header-h: 72px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  /* 细网格纸纹理 */
+  background-image: linear-gradient(rgba(27, 26, 23, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 26, 23, 0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------- 通用布局 ---------- */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+main {
+  padding-top: var(--header-h);
+  min-height: calc(100vh - var(--header-h));
+}
+
+/* ---------- 字体工具类 ---------- */
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.accent-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 8px;
+  vertical-align: 2px;
+}
+
+/* 页面大标题（每个内页顶部） */
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(64px, 10vw, 150px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.page-title .zh {
+  font-family: 'Noto Serif SC', 'Songti SC', serif;
+}
+
+.page-title .dot-end {
+  color: var(--accent);
+}
+
+/* ---------- 页面头部区域 ---------- */
+.page-hero {
+  padding: 90px 0 40px;
+}
+
+.page-hero-meta {
+  display: flex;
+  justify-content: flex-end;
+  gap: 24px;
+  text-align: right;
+}
+
+/* ---------- 章节分隔线 ---------- */
+.rule {
+  border: none;
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border: 1px solid var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  transition: all 0.25s ease;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.btn .arrow {
+  transition: transform 0.25s ease;
+}
+
+.btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+.btn-solid {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.btn-solid:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ---------- 标签 ---------- */
+.chip {
+  display: inline-block;
+  padding: 3px 10px;
+  border: 1px solid var(--line-strong);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  background: var(--bg);
+}
+
+.chip-accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ---------- 十字准星装饰 ---------- */
+.crosshair {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.crosshair::before,
+.crosshair::after {
+  content: '';
+  position: absolute;
+  background: var(--ink-faint);
+}
+
+.crosshair::before {
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+}
+
+.crosshair::after {
+  top: 50%;
+  left: 0;
+  height: 1px;
+  width: 100%;
+}
+
+/* ---------- 文章排版 ---------- */
+.prose {
+  max-width: 780px;
+  margin: 0 auto;
+  font-size: 16.5px;
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  font-family: var(--font-display);
+  margin: 2em 0 0.6em;
+  line-height: 1.3;
+}
+
+.prose h1 {
+  font-size: 1.9em;
+}
+
+.prose h2 {
+  font-size: 1.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--line);
+}
+
+.prose h3 {
+  font-size: 1.2em;
+}
+
+.prose p {
+  margin: 1.1em 0;
+}
+
+.prose a {
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.prose pre {
+  background: var(--thumb-bg);
+  color: #e8e4da;
+  padding: 20px 24px;
+  overflow-x: auto;
+  margin: 1.4em 0;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1.2em;
+  margin: 1.4em 0;
+  color: var(--ink-soft);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5em;
+  margin: 1em 0;
+}
+
+.prose li {
+  margin: 0.4em 0;
+}
+
+.prose img {
+  margin: 1.4em auto;
+  border: 1px solid var(--line);
+}
+
+.prose table {
+  border-collapse: collapse;
+  margin: 1.4em 0;
+  width: 100%;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  text-align: left;
+}
+
+.prose th {
+  background: var(--bg-soft);
+}
+
+/* KaTeX 公式横向滚动 */
+.prose .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+}
+
+/* ---------- 入场动画 ---------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rise-1 { animation-delay: 0.05s; }
+.rise-2 { animation-delay: 0.15s; }
+.rise-3 { animation-delay: 0.25s; }
+.rise-4 { animation-delay: 0.35s; }
+
+@media (max-width: 860px) {
+  .container {
+    padding: 0 22px;
+  }
+
+  .page-hero {
+    padding: 50px 0 30px;
+  }
+}

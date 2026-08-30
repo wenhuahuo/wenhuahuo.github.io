@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout title={`404 — ${SITE.name}`}>
+  <section class="container lost">
+    <p class="mono">ERROR / 404</p>
+    <h1 class="display lost-title">Lost<span class="dot-end">.</span></h1>
+    <p class="sub">页面不存在或已被移动。</p>
+    <a href="/" class="btn">返回首页 <span class="arrow">→</span></a>
+  </section>
+</BaseLayout>
+
+<style>
+  .lost {
+    text-align: center;
+    padding-top: 160px;
+  }
+
+  .lost-title {
+    font-size: clamp(90px, 16vw, 220px);
+    margin: 16px 0 12px;
+  }
+
+  .sub {
+    color: var(--ink-soft);
+    margin-bottom: 36px;
+  }
+</style>

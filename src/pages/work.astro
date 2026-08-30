@@ -1,0 +1,250 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, PROJECTS } from '../data/site';
+---
+
+<BaseLayout title={`项目 — ${SITE.name}`}>
+  <section class="container page-hero">
+    <div class="title-row">
+      <h1 class="page-title rise rise-1">
+        <span class="zh">项目</span><br /><span class="zh">记录</span><span class="dot-end">。</span>
+      </h1>
+      <div class="page-hero-meta mono rise rise-2">
+        <p>WORK // OPEN-SOURCE × RESEARCH</p>
+        <p>PROJECTS · EXPERIMENTS</p>
+        <p>CLICK TO EXPLORE</p>
+      </div>
+    </div>
+
+    <!-- 筛选标签 -->
+    <div class="filters rise rise-3">
+      <button class="filter filter-accent" data-filter="all">■ 全部</button>
+      <span class="fsep">|</span>
+      <button class="filter" data-filter="open">开源项目</button>
+      <span class="fsep">|</span>
+      <button class="filter" data-filter="research">科研项目</button>
+    </div>
+  </section>
+
+  <section class="container">
+    <ol class="project-list rise rise-4">
+      {
+        PROJECTS.map((p) => (
+          <li class={`project-row ${p.category === 'open' ? 'is-open' : 'is-research'}`}>
+            <a href={p.link ?? SITE.contact.github} class="row-link" target={p.link ? undefined : '_blank'} rel="noopener">
+              <span class="num display">{p.num}</span>
+
+              <div class="main">
+                <div class="meta">
+                  <span class="chip chip-accent">
+                    {p.category === 'open' ? '开源' : '科研'}
+                  </span>
+                  <span class="mono">· {p.year} · {p.lang}</span>
+                </div>
+                <h2 class="title display">{p.title}</h2>
+                <p class="desc">{p.desc}</p>
+              </div>
+
+              <div class="side">
+                <div class="tags">
+                  {p.tags.map((t) => (
+                    <span class="chip">{t}</span>
+                  ))}
+                </div>
+                <div class="thumb">
+                  <span class="thumb-label mono">★ · {p.starLabel}</span>
+                </div>
+              </div>
+
+              <span class="arrow">→</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</BaseLayout>
+
+<style>
+  .title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+  }
+
+  /* ----- 筛选 ----- */
+  .filters {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .filter {
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    padding: 4px 2px;
+  }
+
+  .filter:hover {
+    color: var(--ink);
+  }
+
+  .filter-accent {
+    color: var(--accent);
+  }
+
+  .fsep {
+    color: var(--line-strong);
+  }
+
+  /* ----- 列表 ----- */
+  .project-list {
+    list-style: none;
+    margin-top: 26px;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .project-row {
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .row-link {
+    display: grid;
+    grid-template-columns: 70px minmax(0, 1.5fr) minmax(240px, 0.8fr) 40px;
+    gap: 28px;
+    padding: 34px 0;
+    align-items: center;
+    transition: background 0.2s ease;
+  }
+
+  .row-link:hover {
+    background: rgba(232, 98, 44, 0.045);
+  }
+
+  .num {
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--ink-faint);
+    align-self: start;
+    padding-top: 6px;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: clamp(22px, 2.6vw, 30px);
+    margin-bottom: 10px;
+    transition: color 0.2s ease;
+  }
+
+  .row-link:hover .title {
+    color: var(--accent);
+  }
+
+  .desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    max-width: 560px;
+  }
+
+  .side {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: flex-end;
+  }
+
+  .tags {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+  }
+
+  .thumb {
+    width: 128px;
+    height: 78px;
+    background: var(--thumb-bg);
+    border-radius: 4px;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    flex: none;
+  }
+
+  .thumb-label {
+    color: #b5ad9a;
+    font-size: 9px;
+  }
+
+  .arrow {
+    font-size: 20px;
+    color: var(--ink-faint);
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .row-link:hover .arrow {
+    transform: translateX(6px);
+    color: var(--accent);
+  }
+
+  /* 筛选状态由小脚本驱动 */
+  .project-row.hidden-by-filter {
+    display: none;
+  }
+
+  @media (max-width: 960px) {
+    .title-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .row-link {
+      grid-template-columns: 44px 1fr;
+    }
+
+    .num {
+      grid-row: span 2;
+    }
+
+    .side {
+      grid-column: 2;
+      justify-content: flex-start;
+    }
+
+    .arrow {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter');
+  const rows = document.querySelectorAll<HTMLLIElement>('.project-row');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.classList.remove('filter-accent'));
+      btn.classList.add('filter-accent');
+      const f = btn.dataset.filter;
+      rows.forEach((row) => {
+        const show =
+          f === 'all' ||
+          (f === 'open' && row.classList.contains('is-open')) ||
+          (f === 'research' && row.classList.contains('is-research'));
+        row.classList.toggle('hidden-by-filter', !show);
+      });
+    });
+  });
+</script>

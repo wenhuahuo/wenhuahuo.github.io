@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 440">
+  <!-- 占位头像：请替换 public/avatar.svg（或改 index.astro 引用 avatar.jpg） -->
+  <rect width="400" height="440" fill="#e3ddce"/>
+  <circle cx="200" cy="170" r="80" fill="#c9c1ac"/>
+  <path d="M60 440 Q60 320 200 320 Q340 320 340 440 Z" fill="#c9c1ac"/>
+  <text x="200" y="200" font-family="Georgia, serif" font-size="72" font-weight="700" fill="#8f876f" text-anchor="middle">W</text>
+  <text x="200" y="425" font-family="monospace" font-size="13" fill="#8f876f" text-anchor="middle">REPLACE ME: public/avatar.svg</text>
+</svg>

@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const fmt = (d: Date) =>
+  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+---
+
+<BaseLayout title={`文章 — ${SITE.name}`}>
+  <section class="container page-hero">
+    <div class="title-row">
+      <h1 class="page-title rise rise-1">
+        <span class="zh">写作</span><span class="dot-end">。</span>
+      </h1>
+      <div class="page-hero-meta mono rise rise-2">
+        <p>LOG // NOTES & EXPERIMENTS</p>
+        <p>{posts.length} POSTS</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <ul class="post-list rise rise-3">
+      {
+        posts.map((post) => (
+          <li class="post-row">
+            <a href={`/writing/${post.id}`} class="post-link">
+              <span class="mono date">{fmt(post.data.date)}</span>
+              <div class="body">
+                <h2 class="title display">{post.data.title}</h2>
+                {post.data.description && <p class="desc">{post.data.description}</p>}
+                <div class="tags">
+                  {post.data.category && <span class="chip chip-accent">{post.data.category}</span>}
+                  {post.data.tags.map((t) => (
+                    <span class="chip">{t}</span>
+                  ))}
+                </div>
+              </div>
+              <span class="arrow">→</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+  }
+
+  .post-list {
+    list-style: none;
+    margin-top: 30px;
+    border-top: 1px solid var(--line-strong);
+    max-width: 980px;
+  }
+
+  .post-row {
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .post-link {
+    display: grid;
+    grid-template-columns: 110px 1fr 40px;
+    gap: 26px;
+    padding: 32px 0;
+    align-items: start;
+  }
+
+  .post-link:hover .title {
+    color: var(--accent);
+  }
+
+  .post-link:hover .arrow {
+    transform: translateX(6px);
+    color: var(--accent);
+  }
+
+  .date {
+    padding-top: 10px;
+  }
+
+  .title {
+    font-size: clamp(20px, 2.4vw, 27px);
+    margin-bottom: 8px;
+    transition: color 0.2s ease;
+  }
+
+  .desc {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+
+  .tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .arrow {
+    font-size: 20px;
+    color: var(--ink-faint);
+    padding-top: 8px;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  @media (max-width: 700px) {
+    .post-link {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .arrow {
+      display: none;
+    }
+  }
+</style>

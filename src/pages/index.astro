@@ -1,0 +1,184 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout>
+  <section class="hero container">
+    <!-- 左侧：文字区 -->
+    <div class="hero-left">
+      <p class="mono hero-label rise rise-1">
+        <span class="accent-dot"></span>{SITE.taglineLabel}
+      </p>
+
+      <h1 class="display hero-name rise rise-2">
+        {SITE.name.split(' ')[0]}<br />{SITE.name.split(' ').slice(1).join(' ')}<span class="name-dot">.</span>
+      </h1>
+
+      <p class="hero-tagline rise rise-3">
+        {
+          SITE.taglines.map((line) => (
+            <>
+              {line}
+              <br />
+            </>
+          ))
+        }
+      </p>
+
+      <div class="hero-actions rise rise-4">
+        <a href="/work" class="btn">浏览项目 <span class="arrow">→</span></a>
+        <a href="/contact" class="btn">联系我 <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- 右侧：头像档案框 -->
+    <div class="hero-right rise rise-3">
+      <div class="frame">
+        <div class="frame-top mono">
+          <span><span class="accent-dot"></span>PH.D / IN PROGRESS</span>
+          <span>AVATAR / 01</span>
+        </div>
+
+        <div class="frame-body">
+          <span class="crosshair corner tl"></span>
+          <span class="crosshair corner tr"></span>
+          <span class="crosshair corner bl"></span>
+          <span class="crosshair corner br"></span>
+          <!-- TODO: 替换 public/avatar.jpg 为你的头像/形象图 -->
+          <img src="/avatar.svg" alt="avatar" class="avatar" />
+          <div class="scan-line"></div>
+        </div>
+
+        <div class="frame-bottom mono">
+          <div>
+            <p>SUBJECT // {SITE.profile.name}</p>
+            <p>{SITE.profile.role}</p>
+            <p>{SITE.profile.status}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    min-height: calc(100vh - var(--header-h));
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .hero-label {
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+
+  .hero-name {
+    font-size: clamp(72px, 11vw, 168px);
+    text-transform: capitalize;
+    margin-bottom: 36px;
+  }
+
+  .name-dot {
+    color: var(--accent);
+  }
+
+  .hero-tagline {
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 48px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  /* ----- 头像档案框 ----- */
+  .frame {
+    border: 1px solid var(--line-strong);
+    background: rgba(234, 230, 220, 0.6);
+    padding: 16px 18px;
+    position: relative;
+  }
+
+  .frame-top,
+  .frame-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 2px;
+  }
+
+  .frame-bottom {
+    border-top: 1px solid var(--line);
+    margin-top: 14px;
+    padding-top: 14px;
+    line-height: 1.9;
+  }
+
+  .frame-body {
+    position: relative;
+    border: 1px solid var(--line);
+    background-color: var(--bg-soft);
+    background-image: linear-gradient(rgba(27, 26, 23, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(27, 26, 23, 0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+    padding: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .corner {
+    position: absolute;
+    opacity: 0.6;
+  }
+
+  .corner.tl { top: 10px; left: 10px; }
+  .corner.tr { top: 10px; right: 10px; }
+  .corner.bl { bottom: 10px; left: 10px; }
+  .corner.br { bottom: 10px; right: 10px; }
+
+  .avatar {
+    width: min(100%, 380px);
+    filter: grayscale(0.15) contrast(1.02);
+    mix-blend-mode: multiply;
+  }
+
+  .scan-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.5;
+    animation: scan 5s linear infinite;
+  }
+
+  @keyframes scan {
+    0% { top: 0%; }
+    50% { top: 100%; }
+    100% { top: 0%; }
+  }
+
+  @media (max-width: 960px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      min-height: unset;
+      padding-top: 60px;
+    }
+
+    .hero-name br {
+      display: none;
+    }
+  }
+</style>
