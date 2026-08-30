@@ -1,6 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE, PROJECTS } from '../data/site';
+
+// 构建时抓取 GitHub 仓库 Star 数（失败不影响构建）
+async function fetchStars(repo: string): Promise<string> {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${repo}`, {
+      headers: { 'User-Agent': 'astro-site-build' },
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!res.ok) return '·';
+    const data = await res.json();
+    return String(data.stargazers_count ?? '·');
+  } catch {
+    return '·';
+  }
+}
+
+const stars: Record<string, string> = {};
+for (const p of PROJECTS) {
+  if (p.repo) stars[p.num] = await fetchStars(p.repo);
+}
 ---
 
 <BaseLayout title={`项目 — ${SITE.name}`}>
@@ -31,7 +51,12 @@ import { SITE, PROJECTS } from '../data/site';
       {
         PROJECTS.map((p) => (
           <li class={`project-row ${p.category === 'open' ? 'is-open' : 'is-research'}`}>
-            <a href={p.link ?? SITE.contact.github} class="row-link" target={p.link ? undefined : '_blank'} rel="noopener">
+            <a
+              href={p.link ?? SITE.contact.github}
+              class="row-link"
+              target={p.link?.startsWith('http') ? '_blank' : undefined}
+              rel="noopener"
+            >
               <span class="num display">{p.num}</span>
 
               <div class="main">
@@ -52,7 +77,7 @@ import { SITE, PROJECTS } from '../data/site';
                   ))}
                 </div>
                 <div class="thumb">
-                  <span class="thumb-label mono">★ · {p.starLabel}</span>
+                  <span class="thumb-label mono">★ {stars[p.num] ?? '·'} · {p.starLabel}</span>
                 </div>
               </div>
 
@@ -124,7 +149,7 @@ import { SITE, PROJECTS } from '../data/site';
   }
 
   .row-link:hover {
-    background: rgba(232, 98, 44, 0.045);
+    background: rgba(37, 99, 235, 0.05);
   }
 
   .num {

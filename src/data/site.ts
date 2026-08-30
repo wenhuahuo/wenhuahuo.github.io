@@ -11,7 +11,7 @@ export const SITE = {
   taglineLabel: '船舶与海洋工程 × AI / DEEP LEARNING',
   taglines: [
     '攻读博士学位期间，围绕船舶与海洋工程领域的智能化方法开展研究，',
-    '关注大模型安全、深度学习机制与工程软件的智能交互。',
+    '关注 AI4CAD、AI4CFD 与深度学习机制的工程落地，',
     '在这里持续记录开源项目与科研进展。',
   ],
   // 档案卡（About 页左下角）
@@ -21,50 +21,48 @@ export const SITE = {
     role: 'PHD CANDIDATE / RESEARCHER',
     status: 'RESEARCH & BUILDING',
     edu: 'SHIP & OCEAN ENGINEERING',
-    focus: ['LLM SAFETY', 'DEEP LEARNING', 'COMPUTER GRAPHICS'],
+    category: ['AI4CAD', 'AI4CFD', 'DEEP LEARNING'],
+    focus: ['AI AGENT', 'DEEP LEARNING', 'OPEN SOURCE'],
+    methodology: ['VIBE CODING', 'REAL PROJECT'],
     lang: 'ZH / EN',
     ver: 'V 1.0.0',
     est: 'EST. 2025',
   },
   contact: {
-    email: 'your-email@example.com', // TODO: 改成你的邮箱
+    email: 'wenhua_huo@hrbeu.edu.cn',
     github: 'https://github.com/wenhuahuo',
     githubUser: '@wenhuahuo',
-    scholar: '', // TODO: Google Scholar 主页链接，留空则不显示该卡片
-    wechat: 'your-wechat-id', // TODO: 改成你的微信号
+    scholar: '', // 如有 Google Scholar 主页可填，留空则不显示
     location: 'China',
   },
   // 联系页顶部滚动关键词
   marquee: [
-    'LLM Safety',
+    'AI4CAD',
+    'AI4CFD',
     'Deep Learning',
-    'Mixture of Experts',
-    'Computer Graphics',
-    'NURBS / Geometry',
-    'CFD',
+    'AI Agent',
     'Open Source',
-    'Ph.D. Life',
+    'Vibe Coding',
+    'Ship CFD',
+    'Unstructured Mesh',
   ],
 };
 
 // ============================================================
-// 技能栈（About 页右侧 "信号台"）
-// level: 1-10，柱状图高度；status: CORE / ACTIVE / APPLIED；years: 显示时长
+// 技术栈（About 页右侧，INDEX 索引卡形式）
 // ============================================================
-export const SKILLS = [
-  { name: 'Python / PyTorch', level: 9, status: 'CORE', years: '3 YRS', note: 'deep learning' },
-  { name: 'LLM / RAG / Agent', level: 8, status: 'ACTIVE', years: '2 YRS', note: 'applied research' },
-  { name: 'LLM Safety / Guardrails', level: 7, status: 'ACTIVE', years: '1 YR', note: 'alignment' },
-  { name: 'Mixture of Experts', level: 7, status: 'RESEARCH', years: '1 YR', note: 'mechanism study' },
-  { name: 'Star-CCM+ / CFD', level: 7, status: 'APPLIED', years: '2 YRS', note: 'simulation' },
-  { name: 'Computer Graphics', level: 6, status: 'APPLIED', years: '1 YR', note: 'geometry' },
-  { name: 'LaTeX / Academic Writing', level: 8, status: 'CORE', years: '3 YRS', note: 'writing' },
-  { name: 'Linux / HPC Cluster', level: 7, status: 'CORE', years: '3 YRS', note: 'slurm' },
+export const STACK = [
+  { name: 'Python / PyTorch', note: 'deep learning · research code' },
+  { name: 'TypeScript', note: 'web tools · agent apps' },
+  { name: 'Pi Agent', note: 'agent workflow · automation' },
+  { name: 'FreeCAD', note: 'parametric CAD · ship geometry' },
+  { name: 'OpenFOAM', note: 'CFD · unstructured mesh' },
+  { name: 'Slurm / HPC Cluster', note: 'high performance computing' },
 ];
 
 // ============================================================
 // 项目数据 —— category: 'open' 开源项目 / 'research' 科研项目
-// repo: 'user/repo' 将在构建时自动抓取 GitHub Star 数（抓取失败不影响构建）
+// repo: 'user/repo'，构建时自动抓取 GitHub Star 数（失败不影响构建）
 // link: 项目链接（GitHub 仓库 / 论文 / Demo 页）
 // ============================================================
 export type Project = {
@@ -81,69 +79,29 @@ export type Project = {
 };
 
 export const PROJECTS: Project[] = [
-  // TODO: 以下均为占位项目，请替换成你的真实项目
   {
     num: '01',
     category: 'open',
-    title: 'Curve Playground — 贝塞尔 / B-spline / NURBS 交互演示',
-    desc: '用三个最小 Canvas 交互 demo 直观理解二维参数曲线：贝塞尔的整体控制、B-spline 的局部控制、NURBS 的权重调节。配套推导笔记。',
-    year: '2026',
+    title: 'BABY — Build Agent Benchmarks for Yourself',
+    desc: '自己动手构建 Agent 基准：为 AI Agent 工作流设计可复现的评测任务与基准框架，用真实任务衡量 Agent 的真实能力。',
+    year: '2025',
     lang: 'TypeScript',
-    tags: ['Canvas', '计算几何', '图形学'],
-    starLabel: 'CURVE / DEMO',
-    link: '/writing/bezier-bspline-2d-interactive-demo',
+    tags: ['Agent', 'Benchmark', 'AI Workflow'],
+    starLabel: 'AGENT / BENCH',
+    repo: 'wenhuahuo/BABY',
+    link: 'https://github.com/wenhuahuo/BABY',
   },
   {
     num: '02',
-    category: 'open',
-    title: 'MOE-Loss-Lab — Mixture of Experts 损失机制实验',
-    desc: '复现 Adaptive Mixtures of Local Experts 中的合作 / 竞争损失，在旋转 MNIST 角度回归任务上观察 gating 行为与专家分工差异。',
-    year: '2026',
-    lang: 'Python',
-    tags: ['PyTorch', 'MoE', '实验'],
-    starLabel: 'MOE / LAB',
-    link: '/writing/moe-loss-rotated-mnist-experiment',
-  },
-  {
-    num: '03',
-    category: 'open',
-    title: 'LLM-Guardrails-Notes — 大模型安全输出实践',
-    desc: '提示词限制与 AI 护栏两条技术路线的对照实验：敏感请求拒绝、领域外约束、合规检查应对，含基线测试集与评估记录。',
-    year: '2026',
-    lang: 'Python',
-    tags: ['LLM安全', '提示词工程'],
-    starLabel: 'SAFE / LLM',
-    link: '/writing/limiting-llm-safe-output-prompt-and-ai-guardrails',
-  },
-  {
-    num: '04',
     category: 'research',
-    title: '船舶设计大模型的安全护栏体系',
-    desc: '面向船舶与海洋工程领域大模型的输出安全约束研究：领域边界约束、敏感内容过滤、AI 护栏服务接入与合规评测。',
-    year: '2026',
-    lang: 'Research',
-    tags: ['LLM安全', '船舶工程', '合规'],
-    starLabel: 'R / SAFETY',
-  },
-  {
-    num: '05',
-    category: 'research',
-    title: 'MOE 专家协作与竞争机制的可解释性研究',
-    desc: '以旋转 MNIST 角度预测为最小实验平台，系统比较三类 MOE 损失函数对专家分工、gating 分布与收敛行为的影响。',
-    year: '2026',
-    lang: 'Research',
-    tags: ['深度学习', 'MoE', '可解释性'],
-    starLabel: 'R / MoE',
-  },
-  {
-    num: '06',
-    category: 'research',
-    title: '参数化曲线在船舶几何设计中的应用探索',
-    desc: '贝塞尔 / B-spline / NURBS 曲线在船体型线表达中的性质对比与交互式建模工具探索。',
+    title: 'APPSolver — 非结构网格船舶流场逐点预测',
+    desc: '基于自适应 Patch 划分（APP）的船舶流动逐点预测：在原始非结构 CFD 网格上直接进行 next-step 流场预测，将非均匀点云转换为 patch token，并与 LLM 编码的 condition token 融合。',
     year: '2025',
-    lang: 'Research',
-    tags: ['几何建模', '图形学', '型线设计'],
-    starLabel: 'R / GEOM',
+    lang: 'Python',
+    tags: ['船舶CFD', '非结构网格', 'LLM'],
+    starLabel: 'R / SHIP-CFD',
+    repo: 'wenhuahuo/APPSolver',
+    link: 'https://github.com/wenhuahuo/APPSolver',
   },
 ];
 

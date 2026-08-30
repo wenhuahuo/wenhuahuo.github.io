@@ -17,25 +17,6 @@ const cards = [
     href: SITE.contact.github,
     icon: '◉',
   },
-  ...(SITE.contact.scholar
-    ? [
-        {
-          label: 'GOOGLE SCHOLAR',
-          title: SITE.name,
-          sub: '论文 · 学术主页',
-          href: SITE.contact.scholar,
-          icon: '§',
-        },
-      ]
-    : []),
-  {
-    label: 'WECHAT / 微信',
-    title: SITE.contact.wechat,
-    sub: '点击复制',
-    href: '#',
-    icon: '◌',
-    copy: true,
-  },
 ];
 ---
 
@@ -46,7 +27,7 @@ const cards = [
       Let's <em>talk</em><span class="dot-end">.</span>
     </h1>
     <p class="talk-sub rise rise-3">
-      聊聊大模型安全、深度学习机制、科研工程化，或者一次可能的学术合作。
+      聊聊 AI4CAD / AI4CFD、深度学习、开源项目，或者一次可能的学术合作。
     </p>
     <p class="mono status-line rise rise-3">
       <span class="accent-dot"></span>博士在读 · 欢迎邮件与学术交流
@@ -73,11 +54,7 @@ const cards = [
   <section class="container grid rise rise-4">
     {
       cards.map((c) => (
-        <a
-          href={c.href}
-          class="card"
-          data-copy={c.copy ? c.title : undefined}
-        >
+        <a href={c.href} class="card">
           <span class="icon">{c.icon}</span>
           <div class="card-body">
             <p class="mono">{c.label}</p>
@@ -89,8 +66,6 @@ const cards = [
       ))
     }
   </section>
-
-  <p class="copied mono" id="copied">已复制到剪贴板 ✓</p>
 </BaseLayout>
 
 <style>
@@ -110,7 +85,7 @@ const cards = [
     position: relative;
   }
 
-  /* 橙色高亮条 */
+  /* 蓝色高亮条 */
   .talk-title::after {
     content: '';
     position: absolute;
@@ -187,7 +162,7 @@ const cards = [
   }
 
   .card:hover {
-    background: rgba(232, 98, 44, 0.05);
+    background: rgba(37, 99, 235, 0.05);
   }
 
   .card:nth-child(2n) {
@@ -232,18 +207,6 @@ const cards = [
     color: var(--accent);
   }
 
-  .copied {
-    text-align: center;
-    margin-top: 24px;
-    color: var(--accent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .copied.show {
-    opacity: 1;
-  }
-
   @media (max-width: 700px) {
     .grid {
       grid-template-columns: 1fr;
@@ -260,17 +223,3 @@ const cards = [
     }
   }
 </style>
-
-<script>
-  // 微信卡片点击复制
-  const copied = document.getElementById('copied');
-  document.querySelectorAll<HTMLAnchorElement>('a[data-copy]').forEach((el) => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      navigator.clipboard?.writeText(el.dataset.copy ?? '').then(() => {
-        copied?.classList.add('show');
-        setTimeout(() => copied?.classList.remove('show'), 1800);
-      });
-    });
-  });
-</script>
