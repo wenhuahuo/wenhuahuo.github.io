@@ -103,6 +103,18 @@ export const PROJECTS: Project[] = [
     repo: "wenhuahuo/APPSolver",
     link: "https://github.com/wenhuahuo/APPSolver",
   },
+  {
+    num: "03",
+    category: "open",
+    title: "heu-vpn-clash — 优雅使用 Clash 连接哈工程 HEU VPN",
+    desc: "校园网 VPN 接入工具：让 Clash 优雅地连接哈工程 HEU VPN，简化校内资源的网络配置流程。",
+    year: "2025",
+    lang: "Python",
+    tags: ["Clash", "校园网", "网络配置"],
+    starLabel: "TOOL / HEU-VPN",
+    repo: "wenhuahuo/heu-vpn-clash",
+    link: "https://github.com/wenhuahuo/heu-vpn-clash",
+  },
 ];
 
 // 工具：从文章 frontmatter 之外复用
