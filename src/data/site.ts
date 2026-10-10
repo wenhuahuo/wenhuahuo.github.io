@@ -127,6 +127,18 @@ export const PROJECTS: Project[] = [
     repo: "wenhuahuo/PaperReader",
     link: "https://github.com/wenhuahuo/PaperReader",
   },
+  {
+    num: "05",
+    category: "research",
+    title: "NL2Hull — 自然语言驱动的约束船型设计",
+    desc: "将自然语言设计需求转换为结构化几何操作:结合 NURBS 船型表示与自由形变(FFD),通过决策模型选择变形区域、操作与幅度,执行船型重构与约束检查。",
+    year: "2026",
+    lang: "Python",
+    tags: ["AI4CAD", "NURBS", "FFD"],
+    starLabel: "R / SHIP-CAD",
+    repo: "wenhuahuo/NL2Hull",
+    link: "https://github.com/wenhuahuo/NL2Hull",
+  },
 ];
 
 // 工具：从文章 frontmatter 之外复用
