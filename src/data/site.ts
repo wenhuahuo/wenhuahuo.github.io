@@ -115,6 +115,18 @@ export const PROJECTS: Project[] = [
     repo: "wenhuahuo/heu-vpn-clash",
     link: "https://github.com/wenhuahuo/heu-vpn-clash",
   },
+  {
+    num: "04",
+    category: "open",
+    title: "PaperReader — AI 辅助论文阅读工具",
+    desc: "本地论文阅读工具:导入 PDF 并用文件夹树管理文献,接入自己的 AI Agent 进行论文解读、图表解释与选中文本翻译,在本机保存论文、翻译缓存和模型设置。",
+    year: "2026",
+    lang: "JavaScript",
+    tags: ["论文阅读", "AI Agent", "本地工具"],
+    starLabel: "TOOL / PAPER",
+    repo: "wenhuahuo/PaperReader",
+    link: "https://github.com/wenhuahuo/PaperReader",
+  },
 ];
 
 // 工具：从文章 frontmatter 之外复用
